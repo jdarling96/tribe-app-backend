@@ -22,6 +22,7 @@ public class SMSChallengeCodeServiceImpl implements SMSChallengeCodeService {
 	public String sendSMSChallengeCodeToPhoneNumber(String phoneNumber) {
 		String rtn = "";
 		String challengeCode = getRandomStringOfNDigits(6);
+		logger.debug("SMS Challege code is:" + challengeCode);
 		if (smss.sendSMS(phoneNumber, challengeCode + " <--- Your Voting App Challenge Code")) {
 			cache.put("SMSChallengeCodesByPhoneNumber", phoneNumber, challengeCode);
             rtn = challengeCode;
